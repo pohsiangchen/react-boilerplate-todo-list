@@ -8,8 +8,16 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the HomePage container!',
+  myTasks: {
+    id: `${scope}.my.tasks`,
+    defaultMessage: 'My Tasks',
+  },
+  inProgress: {
+    id: `${scope}.in.progress`,
+    defaultMessage: 'In Progress',
+  },
+  completed: {
+    id: `${scope}.completed`,
+    defaultMessage: 'Completed',
   },
 });
