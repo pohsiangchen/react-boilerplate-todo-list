@@ -62,6 +62,8 @@ class HomePage extends React.PureComponent {
     const { classes } = this.props;
     const { tabIndex, isDone, isImportant, isEdit } = this.state;
 
+    console.log(messages);
+
     return (
       <div className={classes.root}>
         <AppBar position="static">

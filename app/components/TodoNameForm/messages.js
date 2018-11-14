@@ -9,8 +9,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.TodoNameForm';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the TodoNameForm component!',
+  addTask: {
+    id: `${scope}.add.task`,
+    defaultMessage: 'Add Task',
   },
 });
