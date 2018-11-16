@@ -22,7 +22,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 import TodoListItem from 'components/TodoListItem';
-// import TodoNameForm from 'components/TodoNameForm';
+import TodoNameForm from 'components/TodoNameForm';
 
 import reducer from 'models/todo/reducer';
 import saga from 'models/todo/saga';
@@ -107,6 +107,7 @@ export class TodoPage extends React.PureComponent {
             <Tab label={<FormattedMessage {...messages.completed} />} />
           </Tabs>
         </AppBar>
+        <TodoNameForm />
         {tabIndex === 0 && this.renderTodoList(todos)}
         {tabIndex === 1 && <Typography>inProgress</Typography>}
         {tabIndex === 2 && <Typography>completed</Typography>}

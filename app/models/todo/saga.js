@@ -57,7 +57,9 @@ export function* fetchTodos() {
 
 export function* fetchTodo({ id }) {
   try {
-    const { data } = yield call(apiFetchTodo, id);
+    const {
+      data: { data },
+    } = yield call(apiFetchTodo, id);
     yield put(fetchTodoAction.success(data));
   } catch (error) {
     const errorMessage = yield call(
@@ -77,11 +79,9 @@ export function* fetchTodo({ id }) {
 export function* updateTodo(formId, data) {
   yield put(startSubmit(formId));
   try {
-    const { data: resData } = yield call(
-      apiUpdateTodo,
-      get(data, 'id'),
-      toNativeJS(data),
-    );
+    const {
+      data: { data: resData },
+    } = yield call(apiUpdateTodo, get(data, 'id'), toNativeJS(data));
     yield put(updateTodoAction.success(resData));
     yield put(stopSubmit(formId));
     yield put(reset(formId));
@@ -103,7 +103,9 @@ export function* updateTodo(formId, data) {
 export function* createTodo(formId, data) {
   yield put(startSubmit(formId));
   try {
-    const { data: resData } = yield call(apiCreateTodo, toNativeJS(data));
+    const {
+      data: { data: resData },
+    } = yield call(apiCreateTodo, toNativeJS(data));
     yield put(createTodoAction.success(resData));
     yield put(stopSubmit(formId));
     yield put(reset(formId));

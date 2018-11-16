@@ -99,7 +99,10 @@ function todoDeleteCancel(state) {
 // Create
 //
 function todoCreateSuccess(state, action) {
-  return state.update('datas', list => list.push(action.data));
+  return state.update('datas', list => {
+    list.push(action.data);
+    return list;
+  });
 }
 
 //

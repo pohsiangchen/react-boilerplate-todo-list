@@ -6,6 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import { compose } from 'redux';
 import reduxForm from 'redux-form/es/immutable/reduxForm';
@@ -19,6 +20,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 import { required } from 'utils/reduxFormHelper';
 
+import { createTodoAction } from 'models/todo/actions';
+
 import styles from './styles';
 import messages from './messages';
 
@@ -27,11 +30,18 @@ const renderOutlinedInput = ({ input, label, ...custom }) => (
   <OutlinedInput key="input" {...input} {...custom} />
 );
 
-function TodoNameForm({ classes, intl, handleSubmit, submitting, pristine }) {
+function TodoNameForm({
+  classes,
+  intl,
+  onCreateTodo: handleCreateTodo,
+  handleSubmit,
+  submitting,
+  pristine,
+}) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        console.log(data);
+        handleCreateTodo(FORM_ID, data);
       })}
     >
       <FormControl className={classes.formControl} variant="outlined" fullWidth>
@@ -63,6 +73,7 @@ function TodoNameForm({ classes, intl, handleSubmit, submitting, pristine }) {
 TodoNameForm.propTypes = {
   classes: PropTypes.object.isRequired,
   intl: intlShape.isRequired,
+  onCreateTodo: PropTypes.func,
   //
   // redux-form props
   //
@@ -71,12 +82,27 @@ TodoNameForm.propTypes = {
   pristine: PropTypes.bool,
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    onCreateTodo: (formId, data) => {
+      dispatch(createTodoAction.request(formId, data));
+    },
+  };
+}
+
+const withConnect = connect(
+  null,
+  mapDispatchToProps,
+);
+
 const withReduxForm = reduxForm({
   form: FORM_ID,
 });
 
 export default compose(
-  withReduxForm,
   injectIntl,
+  withConnect,
+  withReduxForm,
   withStyles(styles),
 )(TodoNameForm);
